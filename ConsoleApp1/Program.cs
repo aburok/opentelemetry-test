@@ -57,10 +57,10 @@ public class Program
                                 };
                             })
                             .AddConsoleExporter()
-                            .AddZipkinExporter(opt =>
-                            {
-                                opt.Endpoint = new Uri(Environment.GetEnvironmentVariable("OTEL_EXPORTER_ZIPKIN_ENDPOINT"));
-                            })
+                            // .AddZipkinExporter(opt =>
+                            // {
+                            //     opt.Endpoint = new Uri(Environment.GetEnvironmentVariable("OTEL_EXPORTER_ZIPKIN_ENDPOINT"));
+                            // })
                             .AddOtlpExporter(opt =>
                             {
                                 opt.Endpoint = new Uri(Environment.GetEnvironmentVariable("OTEL_TRACE_EXPORTER_OTLP_ENDPOINT"));

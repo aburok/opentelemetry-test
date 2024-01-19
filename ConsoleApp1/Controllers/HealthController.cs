@@ -5,19 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ConsoleApp1.Controllers
 {
-    [Route("health")]
+    [Route("")]
     public class HealthController : ControllerBase
     {
         private static ActivitySource _source = new("aspnetcore-controller-api", "1.0");
 
-        [Route("live")]
+        [Route("ping")]
         [HttpGet]
-        public ContentResult Live()
+        public ContentResult Ping()
         {
             using var activity = _source.StartActivity("test activity");
             activity?.SetTag("test", "test-value");
 
-            return new ContentResult() { Content = activity?.RootId.ToString() };
+            return new ContentResult() { Content = $"{activity?.Id } - {activity?.ToString()} - {activity?.DisplayName}"};
         }
 
         [Route("reflect")]
