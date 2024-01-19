@@ -59,12 +59,11 @@ public class Program
                             .AddConsoleExporter()
                             .AddZipkinExporter(opt =>
                             {
-                                opt.Endpoint = new Uri("https://webhook.site/f820c145-2c80-43d6-add9-609c3a071701");
+                                opt.Endpoint = new Uri(Environment.GetEnvironmentVariable("OTEL_EXPORTER_ZIPKIN_ENDPOINT"));
                             })
                             .AddOtlpExporter(opt =>
                             {
-                                opt.Endpoint = new Uri("http://devenv:4317");
-                                opt.Protocol = OtlpExportProtocol.Grpc;
+                                opt.Endpoint = new Uri(Environment.GetEnvironmentVariable("OTEL_TRACE_EXPORTER_OTLP_ENDPOINT"));
                             });
                     });
             })
