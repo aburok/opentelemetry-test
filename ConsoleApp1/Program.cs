@@ -63,7 +63,9 @@ public class Program
                             // })
                             .AddOtlpExporter(opt =>
                             {
-                                opt.Endpoint = new Uri(Environment.GetEnvironmentVariable("OTEL_TRACE_EXPORTER_OTLP_ENDPOINT"));
+                                var endpoint = Environment.GetEnvironmentVariable("OTEL_TRACE_EXPORTER_OTLP_ENDPOINT");
+                                Console.WriteLine(endpoint);
+                                opt.Endpoint = new Uri(endpoint);
                             });
                     });
             })
