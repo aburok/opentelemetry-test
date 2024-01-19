@@ -1,5 +1,12 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
+
+# Install dotnet debug tools
+RUN dotnet tool install --tool-path /tools dotnet-trace \
+ && dotnet tool install --tool-path /tools dotnet-counters \
+ && dotnet tool install --tool-path /tools dotnet-dump \
+ && dotnet tool install --tool-path /tools dotnet-gcdump
+
 WORKDIR /build
 
 COPY ["ConsoleApp1/ConsoleApp1.csproj", "ConsoleApp1/"]
@@ -17,6 +24,10 @@ RUN dotnet publish \
 
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
+# Copy dotnet-tools
+WORKDIR /tools
+COPY --from=build /tools .
+
 WORKDIR /app
 COPY --from=build /app .
 
