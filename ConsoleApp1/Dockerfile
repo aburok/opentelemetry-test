@@ -37,6 +37,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl \
     && apt-get install iputils-ping -y
 
 HEALTHCHECK --interval=10s --timeout=3s --start-period=3s \
-  CMD curl -fs http://localhost:8899/health/live || exit 1
+  CMD curl -fs http://localhost:8899/ping || exit 1
   
 ENTRYPOINT ["dotnet", "ConsoleApp1.dll"]
